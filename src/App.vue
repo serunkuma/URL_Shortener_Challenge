@@ -1,28 +1,68 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container nav-container">
+      <nav class="navbar navbar-expand-sm">
+        <a class="navbar-brand" href="#">
+          <img src="./assets/logo.svg" alt="logo" />
+        </a>
+        <button
+          class="navbar-toggler collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navigation-links"
+          aria-controls="navigation-links"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navigation-links" style="">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Features <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Resources</a>
+            </li>
+          </ul>
+          <ul class="login-signup navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sign Up</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <section class="landing-section">
+      <div class="container">
+        lests get started
+      </div>
+    </section>
+    <section class="urls-section"></section>
+    <section class="statistics-section"></section>
+    <section class="footer-banner"></section>
+    <footer>
+      <div class="container"></div>
+    </footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+  name: "app",
+  components: {}
+};
 </script>
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
