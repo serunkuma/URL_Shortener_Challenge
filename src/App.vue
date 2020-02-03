@@ -70,39 +70,145 @@
             <a href="#" class="btn btn-block bold">Shorten It!</a>
           </div>
         </div>
-        <div class="row d-flex justify-content-between shortened">
-          <div class="col-8 d-flex align-items-center">
+        <div class="row shortened">
+          <div class="col-7 d-flex align-items-center">
             https://www.frontendmentor.io
           </div>
-          <div class="col-4 d-flex align-items-center">
+          <div class="col-3 d-flex align-items-center">
             https://rel.ink/k4lKyk
-            <a href="" class="btn d-inline ml-3">Copy</a>
+          </div>
+          <div class="col-2 ">
+            <a href="" class="btn btn-block">Copy</a>
           </div>
         </div>
-        <div class="row d-flex justify-content-between shortened">
-          <div class="col-8 d-flex align-items-center">
+        <div class="row shortened">
+          <div class="col-7 d-flex align-items-center">
             https://www.frontendmentor.io
           </div>
-          <div class="col-4 d-flex align-items-center">
+          <div class="col-3 d-flex align-items-center">
             https://rel.ink/k4lKyk
-            <a href="" class="btn d-inline ml-3">Copy</a>
           </div>
-        </div>
-        <div class="row d-flex justify-content-between shortened">
-          <div class="col-8 d-flex align-items-center">
-            https://www.frontendmentor.io
-          </div>
-          <div class="col-4 d-flex align-items-center">
-            https://rel.ink/k4lKyk
-            <a href="" class="btn d-inline ml-3">Copy</a>
+          <div class="col-2 ">
+            <a href="" class="btn btn-block">Copy</a>
           </div>
         </div>
       </div>
     </section>
-    <section class="statistics-section"></section>
-    <section class="footer-banner"></section>
+    <section class="statistics-section">
+      <div class="container">
+        <div class="title-area">
+          <h2>Advanced Statistics</h2>
+          <p>
+            Track how your links are performing across the web with our advanced
+            statistics dashboard.
+          </p>
+        </div>
+
+        <div class="stat-cards-wrapper">
+          <hr />
+          <div class="row stat-cards">
+            <div class="col-4">
+              <div class="card">
+                <img class="card-img-top" alt="brand recognition" />
+                <div class="card-body">
+                  <h4>Brand Recognition</h4>
+                  <p class="card-text">
+                    Boost your brand recognition with each click. Generic links
+                    don’t mean a thing. Branded links help instil confidence in
+                    your content.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <img class="card-img-top" alt="brand recognition" />
+                <div class="card-body">
+                  <h4>Brand Recognition</h4>
+                  <p class="card-text">
+                    Boost your brand recognition with each click. Generic links
+                    don’t mean a thing. Branded links help instil confidence in
+                    your content.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <img class="card-img-top" alt="brand recognition" />
+                <div class="card-body">
+                  <h4>Brand Recognition</h4>
+                  <p class="card-text">
+                    Boost your brand recognition with each click. Generic links
+                    don’t mean a thing. Branded links help instil confidence in
+                    your content.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer-banner">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h4>Boost your links today</h4>
+            <a href="" class="btn rounded bold">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </section>
     <footer>
-      <div class="container"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <img src="./assets/images/logo.svg" alt="logo" />
+          </div>
+          <div class="col-8">
+            <div class="row">
+              <div class="col-8">
+                <div class="row">
+                  <div class="col">
+                    <h6>Features</h6>
+                    <ul class="list-unstyled">
+                      <li>Link Sharing</li>
+                      <li>Branded Links</li>
+                      <li>Analytics</li>
+                    </ul>
+                  </div>
+                  <div class="col">
+                    <h6>Resources</h6>
+                    <ul class="list-unstyled">
+                      <li>Blog</li>
+                      <li>Developers</li>
+                      <li>Support</li>
+                    </ul>
+                  </div>
+                  <div class="col">
+                    <h6>Company</h6>
+                    <ul class="list-unstyled">
+                      <li>About</li>
+                      <li>Our Team</li>
+                      <li>Careers</li>
+                      <li>Contact</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <ul class="list-inline">
+                  <li>facebook</li>
+                  <li>twitter</li>
+                  <li>pinterest</li>
+                  <li>instagram</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
   </div>
 </template>
@@ -143,10 +249,16 @@ export default {
       border-radius: 10px;
       position: relative;
       top: -80px;
+      margin-bottom: -60px;
     }
     .row.shortened {
       background-color: #fff;
       border: 1px sold $gray;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      &:last-child {
+        margin-bottom: 0px !important;
+      }
     }
     .row > div {
       height: 60px;
@@ -161,6 +273,53 @@ export default {
       border-radius: 10px;
       justify-content: center;
     }
+  }
+  .statistics-section {
+    background-color: $light-gray;
+    height: 80vh;
+    padding: 8rem 0px;
+    .stat-cards-wrapper {
+      position: relative;
+      > hr {
+        border: 4px solid #2acfcf;
+        position: absolute;
+        top: calc(50% - 2px);
+        z-index: 1;
+        left: 20%;
+        width: 60%;
+      }
+    }
+    .stat-cards {
+      display: flex;
+      height: 300px;
+
+      > hr {
+        position: absolute;
+      }
+      .col-4 {
+        z-index: 2;
+        height: 200px;
+        &:nth-child(1) {
+          align-self: flex-start;
+        }
+        &:nth-child(2) {
+          align-self: center;
+        }
+        &:nth-child(3) {
+          align-self: flex-end;
+        }
+      }
+      .card {
+      }
+    }
+  }
+  .footer-banner {
+    padding: 4rem 0px;
+  }
+  footer {
+    padding: 5rem 0px;
+    background-color: $very-dark-violet;
+    color: #fff;
   }
 }
 </style>
