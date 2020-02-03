@@ -1,0 +1,21 @@
+@import "variables";
+@import "./assets/fonts/poppins/poppins.css";
+
+body {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 18px;
+}
+.bold {
+  font-weight: bold;
+}
+
+.btn {
+  background-color: $cyan;
+  color: #fff;
+  padding: 5px 25px;
+}
+
+.rounded {
+  border-radius: 50px !important;
+}

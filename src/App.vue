@@ -3,7 +3,7 @@
     <div class="container nav-container">
       <nav class="navbar navbar-expand-sm">
         <a class="navbar-brand" href="#">
-          <img src="./assets/logo.svg" alt="logo" />
+          <img src="./assets/images/logo.svg" alt="logo" />
         </a>
         <button
           class="navbar-toggler collapsed"
@@ -35,7 +35,7 @@
               <a class="nav-link" href="#">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sign Up</a>
+              <a class="nav-link btn rounded bold" href="#">Sign Up</a>
             </li>
           </ul>
         </div>
@@ -43,10 +43,62 @@
     </div>
     <section class="landing-section">
       <div class="container">
-        lests get started
+        <div class="row">
+          <div class="col-6">
+            <h1>More than just <br />shorter links</h1>
+            <p>
+              Build your brand’s recognition and get detailed insights on how
+              your links are performing.
+            </p>
+            <a href="#" class="btn bold rounded"> Get Started</a>
+          </div>
+          <div class="col-4"></div>
+        </div>
       </div>
     </section>
-    <section class="urls-section"></section>
+    <section class="urls-section">
+      <div class="container">
+        <div class="row d-flex justify-content-center shorten-it">
+          <div class="col-8">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Shorten a link here..."
+            />
+          </div>
+          <div class="col-2">
+            <a href="#" class="btn btn-block bold">Shorten It!</a>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-between shortened">
+          <div class="col-8 d-flex align-items-center">
+            https://www.frontendmentor.io
+          </div>
+          <div class="col-4 d-flex align-items-center">
+            https://rel.ink/k4lKyk
+            <a href="" class="btn d-inline ml-3">Copy</a>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-between shortened">
+          <div class="col-8 d-flex align-items-center">
+            https://www.frontendmentor.io
+          </div>
+          <div class="col-4 d-flex align-items-center">
+            https://rel.ink/k4lKyk
+            <a href="" class="btn d-inline ml-3">Copy</a>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-between shortened">
+          <div class="col-8 d-flex align-items-center">
+            https://www.frontendmentor.io
+          </div>
+          <div class="col-4 d-flex align-items-center">
+            https://rel.ink/k4lKyk
+            <a href="" class="btn d-inline ml-3">Copy</a>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="statistics-section"></section>
     <section class="footer-banner"></section>
     <footer>
@@ -58,11 +110,57 @@
 <script>
 export default {
   name: "app",
-  components: {}
+  components: {},
+  data: function() {
+    return {};
+  }
 };
 </script>
 
 <style lang="scss">
+@import "variables";
 #app {
+  nav ul.login-signup {
+    min-width: 200px;
+    display: flex;
+    justify-content: space-around;
+    > li {
+      width: 100%;
+    }
+  }
+
+  .landing-section {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .urls-section {
+    background-color: $light-gray;
+    .row.shorten-it {
+      padding: 50px 0px;
+      background-color: $dark-violet;
+      border-radius: 10px;
+      position: relative;
+      top: -80px;
+    }
+    .row.shortened {
+      background-color: #fff;
+      border: 1px sold $gray;
+    }
+    .row > div {
+      height: 60px;
+    }
+    input,
+    a.btn {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    a.btn {
+      border-radius: 10px;
+      justify-content: center;
+    }
+  }
 }
 </style>
