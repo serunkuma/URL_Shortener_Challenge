@@ -61,13 +61,19 @@
         <div class="row d-flex justify-content-center shorten-it">
           <div class="col-8">
             <input
+              v-model="toShorten"
               class="form-control"
               type="text"
               placeholder="Shorten a link here..."
             />
           </div>
           <div class="col-2">
-            <a href="#" class="btn btn-block bold">Shorten It!</a>
+            <a
+              href="#"
+              @click="shortenUrl(toShorten)"
+              class="btn btn-block bold"
+              >Shorten It!</a
+            >
           </div>
         </div>
         <div class="row shortened">
@@ -214,11 +220,41 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "app",
   components: {},
-  data: function() {
-    return {};
+  data() {
+    return {
+      $_relinkUrl: "https://rel.ink/api/links/",
+      $_relinkBase: "https://rel.ink/",
+      toShorten: "",
+      links: []
+    };
+  },
+  methods: {
+    shortenUrl(url) {
+      axios({
+        url: "https://rel.ink/api/links/",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: {
+          url: url
+        }
+      }).then(response => {
+        const hashid = response.data.hashid;
+        const originalUrl = response.data.url;
+        const shortenedUrl = "https://rel.ink/" + hashid;
+        this.links.push({
+          hashid: hashid,
+          originalUrl: originalUrl,
+          shortenedUrl: shortenedUrl
+        });
+      });
+    }
   }
 };
 </script>

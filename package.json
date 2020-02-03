@@ -10,16 +10,17 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.4.4",
-    "vue": "^2.6.10",
     "@fortawesome/fontawesome-free": "latest",
     "@fortawesome/fontawesome-svg-core": "latest",
     "@fortawesome/free-solid-svg-icons": "latest",
     "@fortawesome/vue-fontawesome": "latest",
     "animate.css": "latest",
+    "axios": "^0.19.2",
     "bootstrap": "latest",
+    "core-js": "^3.4.4",
     "jquery": "latest",
-    "popper.js": "latest"
+    "popper.js": "latest",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
