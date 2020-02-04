@@ -3,7 +3,7 @@
     <div class="container nav-container">
       <nav class="navbar navbar-expand-sm">
         <a class="navbar-brand" href="#">
-          <img src="./assets/images/logo.svg" alt="logo" />
+          <img src="./assets/images/logo.svg" svg-inline alt="logo" />
         </a>
         <button
           class="navbar-toggler collapsed"
