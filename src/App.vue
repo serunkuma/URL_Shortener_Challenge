@@ -2,7 +2,7 @@
   <div id="app">
     <header>
       <div class="container py-5">
-        <nav class="navbar navbar-expand-sm">
+        <nav class="navbar navbar-expand-sm navbar-light">
           <a class="navbar-brand" href="#">
             <img src="./assets/images/logo.svg" svg-inline alt="logo" />
           </a>
@@ -48,7 +48,7 @@
     <section class="landing-section">
       <div class="container d-flex align-items-center">
         <div class="row">
-          <div class="col-6">
+          <div class="col-sm-12 col-md-6">
             <h1 class="bold ">More than just <br />shorter links</h1>
             <p>
               Build your brand’s recognition and get detailed insights on how
@@ -56,14 +56,17 @@
             </p>
             <a href="#" class="btn bold rounded"> Get Started</a>
           </div>
-          <div class="col-4"></div>
+          <div class="col-sm-12 col-md-4"></div>
         </div>
       </div>
     </section>
     <section class="urls-section">
       <div class="container">
         <div class="row d-flex justify-content-center shorten-it">
-          <div class="col-8">
+          <div
+            class="col-sm-12 col-md-8"
+            :class="errorMessage.length > 0 ? 'error' : ''"
+          >
             <input
               v-model="toShorten"
               class="form-control"
@@ -77,7 +80,7 @@
               {{ errorMessage }}
             </label>
           </div>
-          <div class="col-2">
+          <div class="col-sm-12 col-md-2">
             <a
               href="javascript:void(0)"
               class="btn btn-block bold"
@@ -427,6 +430,17 @@ export default {
 
 <style lang="scss">
 @import "variables";
+/* --- Media query mixins --- */
+@mixin for-sm-only {
+  @media (max-width: 420px) {
+    @content;
+  }
+}
+@mixin for-md-up {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
 #app {
   /* --- Header --- */
   nav {
@@ -454,6 +468,10 @@ export default {
         }
       }
     }
+    button.navbar-toggler {
+      color: $gray;
+      border: none;
+    }
   }
 
   /* --- Landing Section --- */
@@ -464,15 +482,47 @@ export default {
     background-image: url("./assets/images/illustration-working.svg");
     background-repeat: no-repeat;
     background-position: 110% 50%;
-
     margin-bottom: 6.25rem;
-    h1 {
-      font-size: 4rem;
-      color: $very-dark-violet;
-      & + p {
-        color: $gray;
-        font-size: 1.375rem;
-        margin-bottom: 2rem;
+    @include for-sm-only {
+      background: none;
+      margin-bottom: 10rem;
+    }
+    .col-sm-12.col-md-4 {
+      @include for-sm-only {
+        order: 1;
+        height: 40vh;
+        background-repeat: no-repeat;
+        background-image: url("./assets/images/illustration-working.svg");
+        background-size: cover;
+        background-position: -50% 50%;
+      }
+    }
+    .col-sm-12.col-md-6 {
+      h1 {
+        font-size: 4rem;
+        color: $very-dark-violet;
+        & + p {
+          color: $gray;
+          font-size: 1.375rem;
+          margin-bottom: 2rem;
+        }
+      }
+      @include for-sm-only {
+        order: 2;
+        padding: 3rem;
+        h1 {
+          font-size: 2.5rem;
+          text-align: center;
+          & + p {
+            text-align: center;
+            font-size: 1rem;
+            & + a.btn {
+              display: block;
+              width: 50%;
+              margin: 0 auto;
+            }
+          }
+        }
       }
     }
   }
@@ -480,7 +530,18 @@ export default {
   /* --- URLS Section ---  */
   .urls-section {
     background-color: $light-gray;
+    @include for-sm-only {
+      .container {
+        padding: 3rem;
+      }
+    }
     .row {
+      @include for-sm-only {
+        .col-sm-12.col-md-8 {
+          margin-bottom: 1.5rem;
+        }
+      }
+
       > div {
         height: 60px;
         border-radius: 0.925rem;
@@ -494,6 +555,16 @@ export default {
         margin-bottom: -60px;
         background-image: url("./assets/images/bg-shorten-desktop.svg");
         background-size: cover;
+        @include for-sm-only {
+          top: -100px;
+          padding: 20px;
+          background-image: url("./assets/images/bg-shorten-mobile.svg");
+          .col-sm-12.col-md-8 {
+            &.error {
+              margin-bottom: 40px;
+            }
+          }
+        }
         input,
         a.btn {
           height: 100%;
@@ -512,6 +583,14 @@ export default {
             font-style: italic;
             font-size: 1rem;
             padding-top: 0.8rem;
+          }
+          @include for-sm-only {
+            & + label {
+              padding: 0px;
+              margin: 0px;
+              margin-top: 5px;
+              display: block;
+            }
           }
         }
         a.btn {
