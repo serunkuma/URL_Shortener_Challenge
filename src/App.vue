@@ -94,13 +94,13 @@
           v-for="link in links"
           v-bind:key="link.hashid"
         >
-          <div class="col-7 d-flex align-items-center">
+          <div class="col-sm-12 col-md-7 d-flex align-items-center">
             {{ link.originalUrl }}
           </div>
-          <div class="col-3 d-flex align-items-center">
+          <div class="col-sm-12 col-md-3 d-flex align-items-center">
             {{ link.shortenedUrl }}
           </div>
-          <div class="col-2 d-flex align-items-center">
+          <div class="col-sm-12 col-md-2 d-flex align-items-center">
             <button
               class="btn btn-block"
               v-clipboard:copy="link.shortenedUrl"
@@ -126,7 +126,7 @@
         <div class="stat-cards-wrapper">
           <hr />
           <div class="row stat-cards">
-            <div class="col-4">
+            <div class="col-sm-12 col-md-4">
               <div class="card">
                 <div class="img-wrapper">
                   <img
@@ -147,7 +147,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-sm-12 col-md-4">
               <div class="card">
                 <div class="img-wrapper">
                   <img
@@ -168,7 +168,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-sm-12 col-md-4">
               <div class="card">
                 <div class="img-wrapper">
                   <img
@@ -205,7 +205,7 @@
     <footer>
       <div class="container">
         <div class="row">
-          <div class="col-4">
+          <div class="col-sm-12 col-md-4">
             <img
               src="./assets/images/logo.svg"
               svg-inline
@@ -213,11 +213,11 @@
               class="footer-logo"
             />
           </div>
-          <div class="col-8">
+          <div class="col-sm-12 col-md-8">
             <div class="row">
-              <div class="col-8">
+              <div class="col-sm-12 col-md-8">
                 <div class="row">
-                  <div class="col">
+                  <div class="col-sm-12 col-md-4">
                     <h6>Features</h6>
                     <ul class="list-unstyled">
                       <li>
@@ -237,7 +237,7 @@
                       </li>
                     </ul>
                   </div>
-                  <div class="col">
+                  <div class="col-sm-12 col-md-4">
                     <h6>Resources</h6>
                     <ul class="list-unstyled">
                       <li>
@@ -255,7 +255,7 @@
                       </li>
                     </ul>
                   </div>
-                  <div class="col">
+                  <div class="col-sm-12 col-md-4">
                     <h6>Company</h6>
                     <ul class="list-unstyled">
                       <li>
@@ -282,7 +282,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-sm-12 col-md-4">
                 <ul class="list-unstyled social-links">
                   <li>
                     <a href="javascript:void(0)">
@@ -444,6 +444,18 @@ export default {
 #app {
   /* --- Header --- */
   nav {
+    @include for-sm-only {
+      #navigation-links {
+        background-color: $dark-violet;
+        color: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        ul.navbar-nav.mr-auto {
+          padding-left: 0px !important;
+        }
+      }
+    }
     ul {
       > li {
         width: 100%;
@@ -451,6 +463,9 @@ export default {
         font-weight: bold;
         a {
           color: $gray;
+          @include for-sm-only {
+            color: #fff;
+          }
           &:hover {
             color: $very-dark-violet;
           }
@@ -490,11 +505,11 @@ export default {
     .col-sm-12.col-md-4 {
       @include for-sm-only {
         order: 1;
-        height: 40vh;
+        height: 30vh;
         background-repeat: no-repeat;
         background-image: url("./assets/images/illustration-working.svg");
         background-size: cover;
-        background-position: -50% 50%;
+        background-position: 50px 50%;
       }
     }
     .col-sm-12.col-md-6 {
@@ -509,7 +524,7 @@ export default {
       }
       @include for-sm-only {
         order: 2;
-        padding: 3rem;
+        padding: 2rem;
         h1 {
           font-size: 2.5rem;
           text-align: center;
@@ -606,10 +621,15 @@ export default {
         &:last-child {
           margin-bottom: 0px !important;
         }
-        .col-7 {
+        .col-md-7 {
           color: $very-dark-violet;
+          @include for-sm-only {
+            border-bottom: 1px solid $gray;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+          }
         }
-        .col-3 {
+        .col-md-3 {
           color: $cyan;
         }
         button.btn {
@@ -628,6 +648,11 @@ export default {
     background-color: $light-gray;
     height: 80vh;
     padding: 8rem 0px;
+    @include for-sm-only {
+      padding: 4rem 1rem;
+      height: initial;
+      height: 150vh;
+    }
     .title-area {
       margin-bottom: 4rem;
     }
@@ -635,10 +660,17 @@ export default {
       font-weight: bold;
       text-align: center;
       color: $very-dark-violet;
+      @include for-sm-only {
+        font-size: 1.8rem;
+      }
       & + p {
         color: $gray;
         width: 50%;
         margin: 0 auto;
+        @include for-sm-only {
+          font-size: 1rem;
+          width: 100%;
+        }
       }
     }
     .stat-cards-wrapper {
@@ -650,18 +682,24 @@ export default {
         z-index: 1;
         left: 20%;
         width: 60%;
+        @include for-sm-only {
+          position: relative;
+          transform: rotate(90deg);
+          width: 60vh;
+          left: calc(-30%);
+          top: 500px;
+        }
       }
     }
     .stat-cards {
       display: flex;
       height: 300px;
-
-      > hr {
-        position: absolute;
-      }
-      .col-4 {
+      .col-md-4 {
         z-index: 2;
         height: 200px;
+        @include for-sm-only {
+          margin-bottom: 8rem;
+        }
         &:nth-child(1) {
           align-self: flex-start;
         }
@@ -686,6 +724,9 @@ export default {
             top: -40px;
             left: 40px;
             margin-bottom: -40px;
+            @include for-sm-only {
+              left: 35%;
+            }
             > svg.card-img-top {
               width: 50%;
             }
@@ -730,10 +771,17 @@ export default {
     padding: 5rem 0px;
     background-color: $very-dark-violet;
     color: #fff;
+    @include for-sm-only {
+      svg,
+      .col-md-4 {
+        margin-bottom: 1.5rem;
+      }
+    }
     svg.footer-logo > path {
       fill: #fff;
     }
-    .col {
+    .col-md-4 {
+      text-align: center;
       h6 {
         font-weight: bold;
       }
