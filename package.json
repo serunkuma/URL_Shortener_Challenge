@@ -20,7 +20,8 @@
     "core-js": "^3.4.4",
     "jquery": "latest",
     "popper.js": "latest",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-clipboard2": "^0.3.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",

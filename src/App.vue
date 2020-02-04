@@ -35,7 +35,9 @@
               <a class="nav-link" href="#">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn rounded bold" href="#">Sign Up</a>
+              <a class="nav-link btn rounded bold" href="javascript:void(0)"
+                >Sign Up</a
+              >
             </li>
           </ul>
         </div>
@@ -69,33 +71,33 @@
           </div>
           <div class="col-2">
             <a
-              href="#"
-              @click="shortenUrl(toShorten)"
+              href="javascript:void(0)"
               class="btn btn-block bold"
+              @click="shortenUrl(toShorten)"
               >Shorten It!</a
             >
           </div>
         </div>
-        <div class="row shortened">
+        <div
+          class="row shortened"
+          v-for="link in links"
+          v-bind:key="link.hashid"
+        >
           <div class="col-7 d-flex align-items-center">
-            https://www.frontendmentor.io
+            {{ link.originalUrl }}
           </div>
           <div class="col-3 d-flex align-items-center">
-            https://rel.ink/k4lKyk
+            {{ link.shortenedUrl }}
           </div>
           <div class="col-2 ">
-            <a href="" class="btn btn-block">Copy</a>
-          </div>
-        </div>
-        <div class="row shortened">
-          <div class="col-7 d-flex align-items-center">
-            https://www.frontendmentor.io
-          </div>
-          <div class="col-3 d-flex align-items-center">
-            https://rel.ink/k4lKyk
-          </div>
-          <div class="col-2 ">
-            <a href="" class="btn btn-block">Copy</a>
+            <button
+              class="btn btn-block"
+              v-clipboard:copy="link.shortenedUrl"
+              v-clipboard:success="handleCopyStatus(true)"
+              v-clipboard:error="handleCopyStatus(false)"
+            >
+              Copy
+            </button>
           </div>
         </div>
       </div>
@@ -235,6 +237,7 @@ export default {
   },
   methods: {
     shortenUrl(url) {
+      if (!this.isUrl(url)) return;
       axios({
         url: "https://rel.ink/api/links/",
         method: "post",
@@ -248,12 +251,42 @@ export default {
         const hashid = response.data.hashid;
         const originalUrl = response.data.url;
         const shortenedUrl = "https://rel.ink/" + hashid;
-        this.links.push({
+        this.addLink({
           hashid: hashid,
           originalUrl: originalUrl,
           shortenedUrl: shortenedUrl
         });
       });
+    },
+    addLink(link) {
+      const existingHash = this.links.filter(appLink => {
+        return appLink.hashid == link.hashid;
+      });
+      if (existingHash.length == 0) {
+        this.links.push(link);
+        localStorage.appLinks = JSON.stringify(this.links);
+        window.console.log(localStorage.appLinks);
+        this.toShorten = "";
+      } else {
+        window.console.log("link already existsts. Please enter new link");
+        this.toShorten = "";
+      }
+    },
+    isUrl(str) {
+      const regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+      if (regexp.test(str)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    handleCopyStatus(status) {
+      window.console.log(status);
+    }
+  },
+  mounted() {
+    if (localStorage.appLinks) {
+      this.links = JSON.parse(localStorage.appLinks);
     }
   }
 };
