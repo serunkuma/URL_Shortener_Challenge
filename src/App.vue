@@ -98,7 +98,12 @@
             {{ link.shortenedUrl }}
           </div>
           <div class="col-2 d-flex align-items-center">
-            <button class="btn btn-block" v-clipboard:copy="link.shortenedUrl">
+            <button
+              class="btn btn-block"
+              v-clipboard:copy="link.shortenedUrl"
+              @click="handleCopyStatus(link.hashid)"
+              :id="link.hashid"
+            >
               Copy
             </button>
           </div>
@@ -360,7 +365,8 @@ export default {
         this.addLink({
           hashid: hashid,
           originalUrl: originalUrl,
-          shortenedUrl: shortenedUrl
+          shortenedUrl: shortenedUrl,
+          copied: false
         });
       });
     },
@@ -389,7 +395,6 @@ export default {
       if (existingHash.length == 0) {
         this.links.push(link);
         localStorage.appLinks = JSON.stringify(this.links);
-        window.console.log(localStorage.appLinks);
         this.toShorten = "";
       } else {
         this.errorMessage = "Link already existsts. Please enter new link";
@@ -402,6 +407,13 @@ export default {
         return true;
       } else {
         return false;
+      }
+    },
+    handleCopyStatus(hashid) {
+      if (hashid.lenght !== 0) {
+        document.getElementById(hashid).style.backgroundColor =
+          "hsl(260, 8%, 14%)";
+        document.getElementById(hashid).innerHTML = "Copied";
       }
     }
   },
@@ -536,6 +548,9 @@ export default {
     background-color: $light-gray;
     height: 80vh;
     padding: 8rem 0px;
+    .title-area {
+      margin-bottom: 4rem;
+    }
     h2 {
       font-weight: bold;
       text-align: center;
@@ -607,6 +622,8 @@ export default {
       }
     }
   }
+
+  /* --- Footer Boost Links banner --- */
   .footer-banner {
     padding: 4rem 0px;
     background-color: $dark-violet;
@@ -627,6 +644,8 @@ export default {
       }
     }
   }
+
+  /* --- Footer --- */
   footer {
     padding: 5rem 0px;
     background-color: $very-dark-violet;
