@@ -14,6 +14,10 @@ body {
   background-color: $cyan;
   color: #fff;
   padding: 5px 25px;
+  &:hover {
+    background-color: $very-dark-violet;
+    color: #fff;
+  }
 }
 
 .rounded {

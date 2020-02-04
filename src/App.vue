@@ -1,53 +1,55 @@
 <template>
   <div id="app">
-    <div class="container nav-container">
-      <nav class="navbar navbar-expand-sm">
-        <a class="navbar-brand" href="#">
-          <img src="./assets/images/logo.svg" svg-inline alt="logo" />
-        </a>
-        <button
-          class="navbar-toggler collapsed"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navigation-links"
-          aria-controls="navigation-links"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse" id="navigation-links" style="">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Features <span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Resources</a>
-            </li>
-          </ul>
-          <ul class="login-signup navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link btn rounded bold" href="javascript:void(0)"
-                >Sign Up</a
-              >
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    <header>
+      <div class="container py-5">
+        <nav class="navbar navbar-expand-sm">
+          <a class="navbar-brand" href="#">
+            <img src="./assets/images/logo.svg" svg-inline alt="logo" />
+          </a>
+          <button
+            class="navbar-toggler collapsed"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navigation-links"
+            aria-controls="navigation-links"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="navigation-links" style="">
+            <ul class="navbar-nav mr-auto pl-5">
+              <li class="nav-item active">
+                <a class="nav-link" href="#"
+                  >Features <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Resources</a>
+              </li>
+            </ul>
+            <ul class="login-signup navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link btn rounded bold" href="javascript:void(0)"
+                  >Sign Up</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
     <section class="landing-section">
-      <div class="container">
+      <div class="container d-flex align-items-center">
         <div class="row">
           <div class="col-6">
-            <h1>More than just <br />shorter links</h1>
+            <h1 class="bold ">More than just <br />shorter links</h1>
             <p>
               Build your brand’s recognition and get detailed insights on how
               your links are performing.
@@ -67,7 +69,13 @@
               class="form-control"
               type="text"
               placeholder="Shorten a link here..."
+              name="toShorten"
+              :class="errorMessage.length > 0 ? 'error' : ''"
+              @change="clearErrors()"
             />
+            <label for="toShorten" v-if="errorMessage.length > 0">
+              {{ errorMessage }}
+            </label>
           </div>
           <div class="col-2">
             <a
@@ -89,13 +97,8 @@
           <div class="col-3 d-flex align-items-center">
             {{ link.shortenedUrl }}
           </div>
-          <div class="col-2 ">
-            <button
-              class="btn btn-block"
-              v-clipboard:copy="link.shortenedUrl"
-              v-clipboard:success="handleCopyStatus(true)"
-              v-clipboard:error="handleCopyStatus(false)"
-            >
+          <div class="col-2 d-flex align-items-center">
+            <button class="btn btn-block" v-clipboard:copy="link.shortenedUrl">
               Copy
             </button>
           </div>
@@ -104,7 +107,7 @@
     </section>
     <section class="statistics-section">
       <div class="container">
-        <div class="title-area">
+        <div class="title-area text-center">
           <h2>Advanced Statistics</h2>
           <p>
             Track how your links are performing across the web with our advanced
@@ -117,7 +120,15 @@
           <div class="row stat-cards">
             <div class="col-4">
               <div class="card">
-                <img class="card-img-top" alt="brand recognition" />
+                <div class="img-wrapper">
+                  <img
+                    class="card-img-top"
+                    alt="brand recognition"
+                    src="./assets/images/icon-brand-recognition.svg"
+                    svg-inline
+                  />
+                </div>
+
                 <div class="card-body">
                   <h4>Brand Recognition</h4>
                   <p class="card-text">
@@ -130,26 +141,41 @@
             </div>
             <div class="col-4">
               <div class="card">
-                <img class="card-img-top" alt="brand recognition" />
+                <div class="img-wrapper">
+                  <img
+                    class="card-img-top"
+                    alt="brand recognition"
+                    src="./assets/images/icon-detailed-records.svg"
+                    svg-inline
+                  />
+                </div>
+
                 <div class="card-body">
-                  <h4>Brand Recognition</h4>
+                  <h4>Detailed Records</h4>
                   <p class="card-text">
-                    Boost your brand recognition with each click. Generic links
-                    don’t mean a thing. Branded links help instil confidence in
-                    your content.
+                    Gain insights into who is clicking your links. Knowing when
+                    and where people engage with your content helps inform
+                    better decisions.
                   </p>
                 </div>
               </div>
             </div>
             <div class="col-4">
               <div class="card">
-                <img class="card-img-top" alt="brand recognition" />
+                <div class="img-wrapper">
+                  <img
+                    class="card-img-top"
+                    alt="brand recognition"
+                    src="./assets/images/icon-fully-customizable.svg"
+                    svg-inline
+                  />
+                </div>
+
                 <div class="card-body">
-                  <h4>Brand Recognition</h4>
+                  <h4>Fully Customizable</h4>
                   <p class="card-text">
-                    Boost your brand recognition with each click. Generic links
-                    don’t mean a thing. Branded links help instil confidence in
-                    your content.
+                    Improve brand awareness and content discoverability through
+                    customizable links, supercharging audience engagement.
                   </p>
                 </div>
               </div>
@@ -172,7 +198,12 @@
       <div class="container">
         <div class="row">
           <div class="col-4">
-            <img src="./assets/images/logo.svg" alt="logo" />
+            <img
+              src="./assets/images/logo.svg"
+              svg-inline
+              alt="logo"
+              class="footer-logo"
+            />
           </div>
           <div class="col-8">
             <div class="row">
@@ -181,36 +212,109 @@
                   <div class="col">
                     <h6>Features</h6>
                     <ul class="list-unstyled">
-                      <li>Link Sharing</li>
-                      <li>Branded Links</li>
-                      <li>Analytics</li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >Link Sharing</a
+                        >
+                      </li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >Branded Links</a
+                        >
+                      </li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >Analytics</a
+                        >
+                      </li>
                     </ul>
                   </div>
                   <div class="col">
                     <h6>Resources</h6>
                     <ul class="list-unstyled">
-                      <li>Blog</li>
-                      <li>Developers</li>
-                      <li>Support</li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link">Blog</a>
+                      </li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >Developers</a
+                        >
+                      </li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >Support</a
+                        >
+                      </li>
                     </ul>
                   </div>
                   <div class="col">
                     <h6>Company</h6>
                     <ul class="list-unstyled">
-                      <li>About</li>
-                      <li>Our Team</li>
-                      <li>Careers</li>
-                      <li>Contact</li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >About</a
+                        >
+                      </li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >Our Team</a
+                        >
+                      </li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >Careers</a
+                        >
+                      </li>
+                      <li>
+                        <a href="javscript:void(0)" class="footer-link"
+                          >Contact</a
+                        >
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div class="col-4">
-                <ul class="list-inline">
-                  <li>facebook</li>
-                  <li>twitter</li>
-                  <li>pinterest</li>
-                  <li>instagram</li>
+                <ul class="list-unstyled social-links">
+                  <li>
+                    <a href="javascript:void(0)">
+                      <img
+                        src="./assets/images/icon-facebook.svg"
+                        svg-inline
+                        alt="facebook"
+                      />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="javascript:void(0)">
+                      <img
+                        src="./assets/images/icon-twitter.svg"
+                        svg-inline
+                        alt="twitter"
+                      />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="javascript:void(0)">
+                      <img
+                        src="./assets/images/icon-pinterest.svg"
+                        svg-inline
+                        alt="pinterest"
+                      />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="javascript:void(0)">
+                      <img
+                        src="./assets/images/icon-instagram.svg"
+                        svg-inline
+                        alt="instagram"
+                      />
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -232,12 +336,14 @@ export default {
       $_relinkUrl: "https://rel.ink/api/links/",
       $_relinkBase: "https://rel.ink/",
       toShorten: "",
-      links: []
+      links: [],
+      errorMessage: ""
     };
   },
   methods: {
     shortenUrl(url) {
-      if (!this.isUrl(url)) return;
+      const errors = this.checkForErrors(url);
+      if (errors) return;
       axios({
         url: "https://rel.ink/api/links/",
         method: "post",
@@ -258,6 +364,24 @@ export default {
         });
       });
     },
+    checkForErrors(url) {
+      const isUrlValid = this.isUrl(url);
+      const isUrlEmpty = url.length == 0;
+
+      if (isUrlEmpty) {
+        this.errorMessage = "Please add a link";
+        return true;
+      } else if (!isUrlValid) {
+        this.errorMessage = "Please enter a valid URL. e.g http://example.com";
+        return true;
+      } else {
+        this.errorMessage = "";
+        return false;
+      }
+    },
+    clearErrors() {
+      this.errorMessage = "";
+    },
     addLink(link) {
       const existingHash = this.links.filter(appLink => {
         return appLink.hashid == link.hashid;
@@ -268,7 +392,7 @@ export default {
         window.console.log(localStorage.appLinks);
         this.toShorten = "";
       } else {
-        window.console.log("link already existsts. Please enter new link");
+        this.errorMessage = "Link already existsts. Please enter new link";
         this.toShorten = "";
       }
     },
@@ -279,9 +403,6 @@ export default {
       } else {
         return false;
       }
-    },
-    handleCopyStatus(status) {
-      window.console.log(status);
     }
   },
   mounted() {
@@ -295,58 +416,136 @@ export default {
 <style lang="scss">
 @import "variables";
 #app {
-  nav ul.login-signup {
-    min-width: 200px;
-    display: flex;
-    justify-content: space-around;
-    > li {
-      width: 100%;
-    }
-  }
-
-  .landing-section {
-    height: 80vh;
-    display: flex;
-    align-items: center;
-  }
-
-  .urls-section {
-    background-color: $light-gray;
-    .row.shorten-it {
-      padding: 50px 0px;
-      background-color: $dark-violet;
-      border-radius: 10px;
-      position: relative;
-      top: -80px;
-      margin-bottom: -60px;
-    }
-    .row.shortened {
-      background-color: #fff;
-      border: 1px sold $gray;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      &:last-child {
-        margin-bottom: 0px !important;
+  /* --- Header --- */
+  nav {
+    ul {
+      > li {
+        width: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+        a {
+          color: $gray;
+          &:hover {
+            color: $very-dark-violet;
+          }
+          &.btn:hover {
+            background-color: $very-dark-violet;
+          }
+        }
+      }
+      &.login-signup {
+        min-width: 200px;
+        display: flex;
+        justify-content: space-around;
+        .btn {
+          color: #fff;
+        }
       }
     }
-    .row > div {
-      height: 60px;
-    }
-    input,
-    a.btn {
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-    a.btn {
-      border-radius: 10px;
-      justify-content: center;
+  }
+
+  /* --- Landing Section --- */
+  .landing-section {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    background-image: url("./assets/images/illustration-working.svg");
+    background-repeat: no-repeat;
+    background-position: 110% 50%;
+
+    margin-bottom: 6.25rem;
+    h1 {
+      font-size: 4rem;
+      & + p {
+        color: $gray;
+        font-size: 1.375rem;
+        margin-bottom: 2rem;
+      }
     }
   }
+
+  /* --- URLS Section ---  */
+  .urls-section {
+    background-color: $light-gray;
+    .row {
+      > div {
+        height: 60px;
+        border-radius: 0.925rem;
+      }
+      &.shorten-it {
+        padding: 50px 0px;
+        background-color: $dark-violet;
+        border-radius: 10px;
+        position: relative;
+        top: -80px;
+        margin-bottom: -60px;
+        background-image: url("./assets/images/bg-shorten-desktop.svg");
+        background-size: cover;
+        input,
+        a.btn {
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+        input.error {
+          border: 2px solid $red;
+          color: $red;
+          &::placeholder {
+            color: $red;
+          }
+          & + label {
+            color: $red;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 1rem;
+            padding-top: 0.8rem;
+          }
+        }
+        a.btn {
+          border-radius: 10px;
+          justify-content: center;
+        }
+      }
+      &.shortened {
+        background-color: #fff;
+        border: 1px sold $gray;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        &:last-child {
+          margin-bottom: 0px !important;
+        }
+        .col-7 {
+          color: $very-dark-violet;
+        }
+        .col-3 {
+          color: $cyan;
+        }
+        button.btn {
+          border-radius: 5px;
+          font-weight: bold;
+          .copied {
+            background-color: $very-dark-violet;
+          }
+        }
+      }
+    }
+  }
+
+  /* --- Statistics Section --- */
   .statistics-section {
     background-color: $light-gray;
     height: 80vh;
     padding: 8rem 0px;
+    h2 {
+      font-weight: bold;
+      text-align: center;
+      color: $very-dark-violet;
+      & + p {
+        color: $gray;
+        width: 50%;
+        margin: 0 auto;
+      }
+    }
     .stat-cards-wrapper {
       position: relative;
       > hr {
@@ -377,18 +576,91 @@ export default {
         &:nth-child(3) {
           align-self: flex-end;
         }
-      }
-      .card {
+        .card {
+          border: none;
+          padding: 0px 1rem 1rem;
+          .img-wrapper {
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            border-radius: 60px;
+            background: $dark-violet;
+            position: relative;
+            top: -40px;
+            left: 40px;
+            margin-bottom: -40px;
+            > svg.card-img-top {
+              width: 50%;
+            }
+          }
+          h4 {
+            font-weight: bold;
+            color: $very-dark-violet;
+            & + p {
+              color: $gray;
+              font-size: 1rem;
+            }
+          }
+        }
       }
     }
   }
   .footer-banner {
     padding: 4rem 0px;
+    background-color: $dark-violet;
+    background-image: url("./assets/images/bg-boost-desktop.svg");
+    background-size: cover;
+    h4 {
+      font-weight: bold;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      & + a.btn {
+        height: 3rem;
+        display: flex;
+        width: 200px;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+      }
+    }
   }
   footer {
     padding: 5rem 0px;
     background-color: $very-dark-violet;
     color: #fff;
+    svg.footer-logo > path {
+      fill: #fff;
+    }
+    .col {
+      h6 {
+        font-weight: bold;
+      }
+      ul.list-unstyled {
+        a.footer-link {
+          color: $gray;
+          font-size: 0.925rem;
+          &:hover {
+            color: $cyan;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    ul.list-unstyled {
+      &.social-links {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        a:hover {
+          svg > path {
+            fill: $cyan;
+          }
+        }
+      }
+    }
   }
 }
 </style>
