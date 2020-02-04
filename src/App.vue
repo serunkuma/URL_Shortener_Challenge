@@ -397,7 +397,7 @@ export default {
         localStorage.appLinks = JSON.stringify(this.links);
         this.toShorten = "";
       } else {
-        this.errorMessage = "Link already existsts. Please enter new link";
+        this.errorMessage = "Link already exists. Please enter new link";
         this.toShorten = "";
       }
     },
@@ -468,6 +468,7 @@ export default {
     margin-bottom: 6.25rem;
     h1 {
       font-size: 4rem;
+      color: $very-dark-violet;
       & + p {
         color: $gray;
         font-size: 1.375rem;
