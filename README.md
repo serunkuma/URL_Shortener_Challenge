@@ -1,6 +1,8 @@
 # basic
 
 ## Project setup
+Node 12.16.1
+npm 6.13.4
 
 ```
 npm install

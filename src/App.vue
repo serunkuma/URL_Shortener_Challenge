@@ -341,8 +341,7 @@ export default {
   components: {},
   data() {
     return {
-      $_relinkUrl: "https://rel.ink/api/links/",
-      $_relinkBase: "https://rel.ink/",
+      $_relinkBase: "https://bit.ly/",
       toShorten: "",
       links: [],
       errorMessage: ""
@@ -353,18 +352,21 @@ export default {
       const errors = this.checkForErrors(url);
       if (errors) return;
       axios({
-        url: "https://rel.ink/api/links/",
+        url: "https://api-ssl.bitly.com/v4/shorten",
         method: "post",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer 638d5f9611eed1d95a312a247a6c23eec471c7f4`
         },
         data: {
-          url: url
+          long_url: url
         }
       }).then(response => {
-        const hashid = response.data.hashid;
-        const originalUrl = response.data.url;
-        const shortenedUrl = "https://rel.ink/" + hashid;
+        const hashid = response.data.id.slice(7);
+        // eslint-disable-next-line no-console
+        console.log(hashid);
+        const originalUrl = response.data.long_url;
+        const shortenedUrl = response.data.link;
         this.addLink({
           hashid: hashid,
           originalUrl: originalUrl,
