@@ -16,7 +16,7 @@
     "@fortawesome/vue-fontawesome": "latest",
     "@popperjs/core": "^2.9.2",
     "animate.css": "latest",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bootstrap": "latest",
     "core-js": "^3.4.4",
     "jquery": "latest",
